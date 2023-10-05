@@ -59,7 +59,9 @@ public class TodoController {
     public Resource getIndex(){
         return new ClassPathResource("templates/todo.html");
     }
-
+    // Resource : 정적파일 반환 타입
+    // Resource : import org.springframework.core.io.ClassPathResource;
+    // ClassPathResource : import org.springframework.core.io.Resource;
 
 
 }
