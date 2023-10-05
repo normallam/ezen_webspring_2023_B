@@ -13,8 +13,19 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="7e39f932-e419-4af9-a50f-5415e6995999">
-      <console name="PrototypeDB" type="STANDARD" schema="" session="Main"><![CDATA[# SQL 작성하는 공간
-select now();]]></console>
+      <console name="PrototypeDB" type="STANDARD" schema="springweb" session="Main"><![CDATA[# SQL 작성하는 공간
+
+# 
+use springweb;
+drop table todo;
+# 테이블 생성 코드 범위 지정후 컨트롤 +엔터
+create table todo(
+    tno int auto_increment,
+    tcontent varchar(100),
+    tstate boolean,
+    primary key(tno)
+);
+select * from todo;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
