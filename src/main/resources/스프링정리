@@ -1,0 +1,47 @@
+스프링 : 자바 프레임워크
+    프레임워크 : 여러 기능을 가진 클래스와 라이브러리가 합쳐진 형태/틀
+
+스프일 셋팅
+    - 인텔리제이 무료버젼(커뮤니티) 스프링 프로젝트 지원 안함
+    - 수업기준 : 그레이들 프로젝트
+        - 그레이들[자동(라이브러리)빌드]
+        - http://spring.io/
+    - 그레이들에 빌드할 의존성(라이브러리) 추가 [http://spring.io/]
+        Gradle - Groovy
+        JAVA
+            Spring Boot[2.7.16]
+        JAVA8
+
+    -Dependencies
+        Spring Web : 스프링 웹 관련 라이브러리 지원
+        Lombok : 롬복 [생성자,]
+
+        추후에 계속적으로 추가
+
+    - build.gradle 에 Dependencies 추가
+
+  프로젝트 폴더 구성
+    프로젝트명
+        .gradle : buiid.gradle 빌드 파일 [임시파일]
+        .idea : 인텔리제이 셋팅 파일 [임시파일]
+        build : JVM 빌드시 생성한 바이트 파일 [임시파일]
+        gradle : gradle 라이브러리 파일
+        ****src : 개발자 코드 작성하는 공간
+            main
+                    java        : 백엔드
+                    resource    : 프론트엔드[정적파일(html,css,js,img 등등)]
+                        static
+                            css/js/img 등등
+
+                        templates
+
+                        *** - application.properties : 현재 프로젝트 설정 소스 파일
+
+        **** build.gradle : 라이브러리 자동 빌드 해주는 작성 코드 작성
+
+    -HTML 반환
+        Resource 클래스 사용
+        경로 : return new ClassPathResource("templates/todo.html");
+        -스프링은 기본적으로 resource 폴더
+
+
