@@ -20,12 +20,12 @@ public class MemberController {
         boolean result = memberService.postMember(memberDto);
         return result;
     }
-    // 2. [R] 회원정보 호출 [1명]
+   /* // 2. [R] 회원정보 호출 [1명]  // 세션을 구현 안했을 때
     @GetMapping("/get")
     public MemberDto getMember(@RequestParam int mno){
         MemberDto memberDto = memberService.getMember(mno);
         return memberDto;
-    }
+    }*/
     // 3. [U] 회원정보 수정
     @PutMapping("/put")
     public boolean updateMember(@RequestBody MemberDto memberDto){
@@ -39,14 +39,28 @@ public class MemberController {
         return result;
     }
     
-    // 5. 아이디 찾기
+    // 5. [post] 로그인   get/post  요청(아이디/비밀번호) / 응답(성공/실패)
+    @PostMapping("/login")
+    public boolean login(@RequestBody MemberDto memberDto)
+    {
+        boolean result = memberService.login(memberDto);
+        return result;
+    }
     
     
+    // 6. [get] 로그아웃  get/post  요청/응답(성공/실패)
+    @GetMapping("/logout")
+    public boolean logout(){
+        boolean result = memberService.logout();
+        return result;
+    }
     
-    // 6. 비밀번호 찾기
-    
-    
-    
+    // 2. [R] 회원정보 호출
+    @GetMapping("/get")
+    public MemberDto getMember(){
+        return  memberService.getMember();
+    }
+
     
     
 }
