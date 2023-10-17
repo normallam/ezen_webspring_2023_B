@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--css/js/img는 static 폴더에서부터 경로 시작하므로 (static) 생략-->
+    <link href="/phone.css" rel="stylesheet">
+</head>
+<body>
+
+        <div class ="phonewrap"> <!--전체구역-->
+            <h1> 나만의 전화번호부 </h1>
+            <div class="phone_top"> <!--쓰기 구역 -->
+                <input class="pcontent" type ="text"/>
+                <button onclick="postphone()" type="button"> 등록 </button>
+                    <input class="pname" placeholder="이름을 입력하세요">
+                    <input class="pphone" placeholder="전화번호를 입력하세요">
+
+            </div>
+
+            <div class ="phone_bottom"> <!--출력 구역 -->
+
+            </div>
+        </div>
+
+        <!-- css/js/img 는 static 폴더에서부터 경로 시작 하므로 (static)생략 -->
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script src="/phone.js"></script>
+</body>
+</html>
