@@ -15,7 +15,7 @@ function postphone(){
          contentType:'application/json;charset=UTF-8',
          data : JSON.stringify({
                       pname : pname,
-                      pnumber: pphone,
+                      pnumber: pphone
                       }),
          success : s => {
             if(s){console.log('Post 통신 확인');getphone();}
@@ -45,8 +45,8 @@ function getphone(){
                             `        <div class="pno">
                                         <span class="pname">${t.name}</span>
                                         <span class="pphone">${t.number}</span>
-                                        <button onclick="doPut(${t.pno})">수정</button>
-                                        <button onclick="onDelete(${t.pno})">삭제</button>
+                                        <button onclick="putPhone(${t.pno})">수정</button>
+                                        <button onclick="deletePhone(${t.pno})">삭제</button>
                                     </div>`
 
 

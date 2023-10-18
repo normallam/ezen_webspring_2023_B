@@ -1,5 +1,6 @@
 package ezenweb.model.entity;
 
+import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
                     // 공통된 어노테이션 정보 [@CreatedDate, @LastModifiedDate] 등을 부모 클래스로 선언하고 어노테이션 정보를 자식클래스에게 제공
 @MappedSuperclass // 엔티티 x [여러 엔티티가 공통으로 사용하는 필드에 대해 구성할 때]
 @EntityListeners( AuditingEntityListener.class )
+@Getter
 
 public class BaseTime {
     @CreatedDate // 엔티티가 생성될 떄 시간이 자동 저장/주입

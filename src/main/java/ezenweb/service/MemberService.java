@@ -12,7 +12,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Service // 서비스(@Component 포함)
 public class MemberService {
 
     // Controller -> Service -> Repository 요청
