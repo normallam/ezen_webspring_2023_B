@@ -13,7 +13,7 @@ function 도서(props){
       //----------JSX 구역 S
        return(<>
           <h3> 도서명: {props.도서명} </h3>
-          <div>도서명: {props.저자} / 소비자가격 : {props.소비자가격}</div>
+          <div>저자명: {props.저자} / 소비자가격 : {props.소비자가격}</div>
        </>)
 }
 

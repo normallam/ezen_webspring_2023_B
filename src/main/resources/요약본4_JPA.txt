@@ -1,7 +1,7 @@
 -----
     패러다임(=방식/체계/규정 틀)
     ORM( = Object Relational Mapping ) : 객체 관계 매핑
-        - 객체 지향 프로그래밍   : 객체들간의 상호작용을 통한 프로그래램
+        - 객체 지향 프로그래밍   : 객체들간의 상호작용을 통한 프로그램
         - 관계형 데이터베이스    : 열/행의 테이블/관계로 데이터를 저장하는 방식
         + 관계형 데이터베이스를 객체지향으로 매핑 사용
 
@@ -12,9 +12,9 @@
         <---> DTO , VO
 ------
 
-    MYSQL          < ------------------------ ORM 매핑/연결 ------------> JPA(ORM)
-    테이블 TODO                                                          @Entitiy
-        create table todo(                                              class todo (
+    MYSQL          < ------------------------ ORM 매핑/연결 ------------>       JPA(ORM)
+    테이블 TODO                                                                @Entitiy
+        create table todo(                                                      class todo (
             tno int auto_increment primary key ,                              private int tno;
             tcontent varchar(100) ,                                           private String tno;
             tstate boolean                                                    private boolean tstate;
