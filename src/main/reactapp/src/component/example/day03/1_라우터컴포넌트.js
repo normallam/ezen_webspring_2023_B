@@ -31,6 +31,9 @@ import { BrowserRouter , Routes , Route , Link }from "react-router-dom"; // npm 
 import 컴포넌트1 from '../day01/1_컴포넌트' // 다른 폴더에 있는 컴포넌트 호출
 export default function 라우터컴포넌트(props){
     return(<>
+
+
+
        <BrowserRouter> {/*브라우저 라우터 시작*/}
             <Routes>
                    <Route path='/day01/컴포넌트1' element = { <컴포넌트1/> }/>   {/* 컴포넌트로 연결할 가상 url 경로 정의 */}
