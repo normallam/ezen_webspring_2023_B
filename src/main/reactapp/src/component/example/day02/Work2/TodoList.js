@@ -1,24 +1,31 @@
-//  컴포넌트 호출 하기 : import 컴포넌트명  from '파일경로';
 import Todo from './Todo.js';
-export default function TodoList(props){
-
-    // 만약에 AJAX가 response 한 데이터
+export default function TodoList( props ){
     let response = [
-            {name : '리액트배우기' , content : '안녕하세요1'} ,
-
+            {tcontent : '리액트배우기' } ,
+            {tcontent : '자바배우기' } ,
+            {tcontent : '파이썬배우기' } ,
+            {tcontent : 'C언어배우기' }
         ];
 
     return(<>
-        <div className="TodoListBox">
-            {
-                 response.map((r)=>{
-
-                    return(<Todo name={r.name} content={r.content} />);
-                 })
-
-            }
-
+        <div className="todowrap">
+            <h1> 나만의 할일 목록 </h1>
+            <div className="todo_top">
+                <input className="tcontent" type="text"/>
+                <button type="button"> 등록 </button>
+            </div>
         </div>
 
-    </>)
+
+
+        <div className="CommentListBox">
+            {
+                response.map(r=>{
+                    return( <Todo tcontent={r.tcontent} />);
+                })
+            }
+
+
+        </div>
+    </>);
 }

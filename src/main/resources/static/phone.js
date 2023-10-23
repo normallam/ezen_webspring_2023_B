@@ -2,16 +2,16 @@ console.log('phone.js open');
 
 // 1. post ajax
 
-function postphone(){
+function postPhone(){
 
     console.log('postphone 확인');
-    let pname = document.querySelector('pname').value;
-    let pphone = document.querySelector('pphone').value;
+    let pname = document.querySelector('.pname').value;
+    let pphone = document.querySelector('.pphone').value;
     console.log(pname+'들어오니');
     console.log(pphone+'들어오니');
     $.ajax({
-         url : '/index',
-         type : 'POST',
+         url : '/phone',
+         type : "post",
          contentType:'application/json;charset=UTF-8',
          data : JSON.stringify({
                       pname : pname,
@@ -31,54 +31,52 @@ getphone();
 function getphone(){
 
     console.log('getphone 확인')
+
+     let phone_bottom = document.querySelector('.phone_bottom');
+      let html = ``;
     $.ajax({
-             url : '/index',
-             type : 'get',
+             url : '/phone',
+             type : "get",
              contentType:'application/json;charset=UTF-8',
-             data : { }
+             data : { },
              success : s => {
+                        console.log("이거 뭘까요");
                         console.log(s);
-                        let phone_bottom = document.querySelector('.phone_bottom');
-                        let html = ``
-                        r.forEach(t=>{
+
+                        s.forEach(t=>{
                              html+=
-                            `        <div class="pno">
-                                        <span class="pname">${t.name}</span>
-                                        <span class="pphone">${t.number}</span>
-                                        <button onclick="putPhone(${t.pno})">수정</button>
+                            `        <div class="pnoo">
+                                        <span class="pname">${t.pname}</span>
+                                        <span class="pphone">${t.pnumber}</span>
+                                        <button onclick="putphone(${t.pno})">수정</button>
                                         <button onclick="deletePhone(${t.pno})">삭제</button>
-                                    </div>`
+                                    </div>`;
 
-
-
-                if(s){console.log('Post 통신 확인');getphone();}
+                         })
+                            phone_bottom.innerHTML=html;
              },
-             error: e =>{console.log(e+'Post 에러확인');}
-             })
+             error: e =>{console.log(e+'get 에러확인');}
 
-
-
-
+    })
 }
-
 // 3. put ajax
 //3.PUT
-function putPhone(pno){
+function putphone(pno){
  let pname=prompt('수정할 이름');
  let pnumber=prompt('수정할 번호');
     $.ajax({
-        url : "/index",
+        url : '/phone',
         method : "put",
         data : JSON.stringify({
-                                name:pname,
-                                number:pnumber,
+                                pname:pname,
+                                pnumber:pnumber,
                                 pno:pno
 
                                    }),
         contentType: "application/json;charset=UTF-8",
         success : r=>{
-            console.log('put 통신성공');console.log(r)
-            doGet()
+            console.log('put 통신성공');console.log(r);
+           getphone();
              },
 
 
@@ -93,16 +91,15 @@ function putPhone(pno){
 
 
 // 4. delete ajax
-function deletePhone(pno){
+function deletePhone(pno){ console.log("들어오냐 삭제"); console.log(pno+"pno이거임");
     $.ajax({
-        url : "/index",
+        url : '/phone',
         method : "delete",
         data : {pno:pno},
         success : r=>{
-            console.log('delete 통신성공');console.log(r)
-            doGet()
+            console.log('delete 통신성공');console.log(r);
+           getphone();
             } ,
         error : e=>{console.log('delete통신실패')} ,
    });
-
 }

@@ -13,7 +13,9 @@ import java.util.List;
 public class BoardController {
     @Autowired
     private BoardService boardService;
+
     // 1. C
+
     @PostMapping("")
     public boolean write( BoardDto boardDto){
         return boardService.write(boardDto);

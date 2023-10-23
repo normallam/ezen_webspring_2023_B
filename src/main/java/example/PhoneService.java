@@ -15,7 +15,7 @@ public class PhoneService {
 
 
     // 1. C
-
+    @Transactional
     public boolean postPhone(PhoneDto phoneDto){
 
         /*
@@ -32,8 +32,13 @@ public class PhoneService {
                 .build();
 
         // 2. JPARepository 를 이용한 엔티티 저장 [insert 대체]
+
         phoneEntityRepository.save(phoneEntity);
 
+        if(phoneEntity.getPno() >= 1)
+
+
+        {return true;}
         return  false;
     }
 
@@ -86,11 +91,15 @@ public class PhoneService {
 
     public boolean deletePhone(int pno){
 
-        // 1. tno[pk식별번호]에 해당하는 엔티티 삭제[delete 대체]
-        phoneEntityRepository.deleteById(pno);
+        //
+        Optional<PhoneEntity> optionalPhoneEntity = phoneEntityRepository.findById(pno);
 
+        //
+        if(optionalPhoneEntity.isPresent()){
+            phoneEntityRepository.deleteById(pno);
+            return true;
+        }
         return  false;
     }
-
 
 }

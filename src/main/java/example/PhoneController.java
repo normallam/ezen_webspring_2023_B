@@ -19,7 +19,7 @@ public class PhoneController {
     public Resource getCall(){return new ClassPathResource("templates/phone.html");
     }
     @PostMapping("")
-    public boolean postphone(@RequestBody PhoneDto phoneDto){
+    public boolean postPhone(@RequestBody PhoneDto phoneDto){
         boolean result = phoneService.postPhone(phoneDto);
         return result;
     }

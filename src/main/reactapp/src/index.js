@@ -15,16 +15,20 @@ import reportWebVitals from './reportWebVitals';
 //import CommentList from './component/example/day02/CommentList'
 //import TodoList from './component/example/day02/Work2/TodoList'
 
-import 라우터컴포넌트 from './component/example/day03/1_라우터컴포넌트'
+//import 라우터컴포넌트 from './component/example/day03/1_라우터컴포넌트'
+//import 컴포넌트명 from 'jsx파일경로'
+
+import Index from './component/Index'
 
 //1. index.html에 <div id="root"> dom객체 호출
 const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<React.StrictMode>  <Index /> </React.StrictMode>);
 //2. 리액트랜더링(JSX-->HTML로 변환 )
    //<React.StrictMode> :예외처리 컴포넌트
 //root.render(<React.StrictMode>  <App /> </React.StrictMode>);
 //root.render(<React.StrictMode>  <CommentList/> </React.StrictMode>);
 //root.render(<React.StrictMode>  <TodoList/> </React.StrictMode>);
-root.render(<React.StrictMode>  <라우터컴포넌트 /> </React.StrictMode>);
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
