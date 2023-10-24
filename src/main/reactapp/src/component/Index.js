@@ -23,6 +23,7 @@ import Signup from './member/Signup';
 
 import CSS적용컴포넌트 from './example/day02/1_CSS적용컴포넌트';
 import CommentList from './example/day02/CommentList';
+import Axios컴포넌트 from './example/day04/1_Axios컴포넌트';
 
 export default function Index(props){
     return(<>
@@ -45,7 +46,7 @@ export default function Index(props){
 
                     <Route path = '/example/day01/과제1_도서목록' element = { <과제01/>}/>
                     <Route path = '/example/day02/Work2/TodoList' element = { <과제02/>}/>
-
+                     <Route path = '/example/day04/Axios컴포넌트' element = { <Axios컴포넌트/>}/>
                     {/*MEMBER*/}
                     <Route path='/login' element={<Login />}/>
                     <Route path='/signup' element={<Signup />}/>
