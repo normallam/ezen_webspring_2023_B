@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController // 컨트롤러(@Componet 포함 = 스프링컨테이너(스프링 관리하는 메모리 공간) 빈(객체) 등록) + ResponseBody
 @RequestMapping("/member")
-@CrossOrigin("http://192.168.17.34:3000") // 교차 리소스 공유
+//@CrossOrigin("http://192.168.17.34:3000") // 교차 리소스 공유
 public class MemberController {
     // Controller -> Service 요청
     // Controller <- Service 응답

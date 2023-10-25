@@ -17,7 +17,7 @@ export default function Signup(props){
 
         // 4. 통신
         axios
-            .post('http://192.168.17.34:80/member/post',info)
+            .post('/member/post',info)
             .then(r=>{
                 if(r.data){
                     alert('회원가입 성공');

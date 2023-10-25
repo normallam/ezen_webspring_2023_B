@@ -63,7 +63,7 @@ export default function Axios컴포넌트(props){
             .then(response=>{console.log(response);});
 
         axios
-            .get('https://jsonplaceholder.typicode.com/comments',{params:{'postId':1}})
+            .get('https://jsonplaceholder.typicode.com/comments',{params:{'postId':1}}) // queryString
             .then(response=>{console.log(response);});
 
 
@@ -72,8 +72,8 @@ export default function Axios컴포넌트(props){
     function doPost(){
         let saveInfo = { title: 'foo', body: 'bar',  userId: 1, }
         axios
-        .post('https://jsonplaceholder.typicode.com/posts', saveInfo)
-        .then(r => {console.log(r.data);});
+            .post('https://jsonplaceholder.typicode.com/posts', saveInfo)
+            .then(r => {console.log(r.data);});
     }
 
     // 3. PUT
