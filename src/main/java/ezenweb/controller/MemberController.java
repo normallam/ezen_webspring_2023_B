@@ -64,7 +64,13 @@ public class MemberController {
         return  memberService.getMember();
     }
 
-    
+    // 7. [R] [이메일 중복검사]
+    @GetMapping("/findMemail")
+    public boolean getFindMail(@RequestParam String memail){
+        System.out.println("memail =" + memail);
+
+        return memberService.getFindMemail(  memail );
+    }
     
 }
 
