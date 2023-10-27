@@ -19,6 +19,7 @@ import 과제02 from './example/day02/Work2/TodoList';
 /* Member import*/
 import Login from './member/Login';
 import Signup from './member/Signup';
+import Info from './member/Info';
 
 
 import CSS적용컴포넌트 from './example/day02/1_CSS적용컴포넌트';
@@ -49,6 +50,7 @@ export default function Index(props){
                      <Route path = '/example/day04/Axios컴포넌트' element = { <Axios컴포넌트/>}/>
                     {/*MEMBER*/}
                     <Route path='/login' element={<Login />}/>
+                    <Route path='/info' element={<Info />}/>
                     <Route path='/signup' element={<Signup />}/>
                 </Routes>
                 <Footer />

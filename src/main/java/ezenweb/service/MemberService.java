@@ -52,7 +52,7 @@ public class MemberService {
         System.out.println("mno = " + mno);
         return null;
     }*/
-    // 3. [U] 회원정보 수정
+    // 3. [U] 회원정보 수정 [mno, name, password, phone]
     @Transactional // 안쓰면 실행 자체가 안됨
     public boolean updateMember( MemberDto memberDto){
         System.out.println("memberDto" + memberDto);
@@ -83,7 +83,9 @@ public class MemberService {
         // 2. 만약에 삭제할 엔티티가 반환/검색 존재하면
         if(optionalMemberEntity.isPresent()){
             memberEntityRepository.delete(optionalMemberEntity.get());
-        return true;
+            // 4.삭제 성공시
+            logout(); // 로그아웃 함수 재사용
+            return true;
         }
         return false;
     }
