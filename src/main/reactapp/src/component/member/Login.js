@@ -13,10 +13,16 @@ export default function Login( props ){
                 memail : document.querySelector('.memail').value ,
                 mpassword : document.querySelector('.mpassword').value
             }; console.log(info);
+            // 3-2. 데이터구성 [FORM]
+            let loginForm = document.querySelectorAll('.loginForm')[0];
+            let loginFormData = new FormData(loginForm);
+
+
             // 4. !! AXIOS  통신  [ *SPRING CONTROLLER 매핑 확인후 ]
             axios
-                .post( '/member/login' , info )
+                .post( '/member/login' , loginFormData )
                 .then( r => {
+                    console.log(r.data);
                     if( r.data ){
                         alert('로그인 성공');
                         window.location.href = '/';
@@ -30,11 +36,18 @@ export default function Login( props ){
     return(<>
         <div className="loginContainer">
             <h3> ReactEzen LOGIN </h3>
-            <form action="/member/login" method="post">
-                아이디 <input type="text" placeholder='email address' name='memail' />
-                비밀번호 <input type="password"  placeholder='password' name='mpassword' />
+            <form className='loginForm'>
+                아이디 <input type="text" placeholder='email address' name='memail' className='memail' id='memail' />
+                비밀번호 <input type="password"  placeholder='password' name='mpassword' className='mpassword' id='mpassword'/>
+
                 <Link to=''>아이디찾기 </Link> <Link to=''> 비밀번호찾기 </Link>
-                <button type="submit">로그인</button>
+
+                <button type="button" onClick={onLogin}>로그인</button>
+
+                <a className="loginkakao" href="/oauth2/authorization/kakao"> 카카오 1초 로그인 </a>
+                <a className="loginnaver" href="/oauth2/authorization/naver"> 네이버 1초 로그인 </a>
+                <a className="logingoogle" href="/oauth2/authorization/google"> 구글 1초 로그인 </a>
+
             </form>
         </div>
     </>)
