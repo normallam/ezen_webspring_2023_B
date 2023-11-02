@@ -1,6 +1,7 @@
 package ezenweb.service;
 
 import ezenweb.model.dto.BoardDto;
+import ezenweb.model.dto.MemberDto;
 import ezenweb.model.entity.BoardEntity;
 import ezenweb.model.entity.MemberEntity;
 import ezenweb.model.repository.BoardEntityRepository;
@@ -39,6 +40,11 @@ public class BoardService {
         // memberService.getMember().getMno();
         // 2. 회원pk번호를 가지고 pk엔티티 찾기
         // ================================= 단방향 ================================================= //
+        MemberDto loginDto = memberService.getMember();
+        if(loginDto == null) {return false;}
+            // memberService.getMember().getMno()
+
+
         Optional<MemberEntity> memberEntityOptional
                 = memberEntityRepository.findById( memberService.getMember().getMno() );
         // 3. 유효성검사 [ 로그인이 안된상태 글쓰기 실패 ]

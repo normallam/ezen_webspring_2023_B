@@ -21,6 +21,9 @@ import Login from './member/Login';
 import Signup from './member/Signup';
 import Info from './member/Info';
 
+import BoardList from './board/BoardList';
+import BoardWrite from './board/BoardWrite';
+
 
 import CSS적용컴포넌트 from './example/day02/1_CSS적용컴포넌트';
 import CommentList from './example/day02/CommentList';
@@ -52,6 +55,10 @@ export default function Index(props){
                     <Route path='/login' element={<Login />}/>
                     <Route path='/info' element={<Info />}/>
                     <Route path='/signup' element={<Signup />}/>
+                    {/*board*/}
+                    <Route path='/board/list' element={<BoardList />}/>
+                    <Route path='/board/write' element={<BoardWrite />}/>
+
                 </Routes>
                 <Footer />
             </BrowserRouter>
