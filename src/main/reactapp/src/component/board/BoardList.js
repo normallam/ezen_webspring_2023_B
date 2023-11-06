@@ -21,6 +21,7 @@
 
 import axios from 'axios';
 import {useState, useEffect } from 'react';
+import {Link} from 'react-router-dom';
 // ------------------ mui table 관련 컴포넌트 import ------------------- //
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -68,7 +69,9 @@ export default function BoardList( props ){
               {rows.map((row) => (
                 <TableRow key={row.name}  sx={{ '&:last-child td, &:last-child th': { border: 0 } }} >
                   <TableCell align="right">{row.bno}</TableCell>
-                  <TableCell align="right">{row.btitle}</TableCell>
+                  <TableCell align="right">
+                    <Link to={"/board/view?bno="+row.bno}>{row.btitle}</Link>
+                    </TableCell>
                   <TableCell align="right">{row.mno}</TableCell>
                   <TableCell align="right">{row.cdate}</TableCell>
                   <TableCell align="right">{row.bview}</TableCell>
@@ -88,11 +91,6 @@ export default function BoardList( props ){
         { bno : 5 , btitle : '안녕5' , mno : 1 , cdate : '2023-11-02' , bview : 0 } ,
         { bno : 6 , btitle : '안녕6' , mno : 1 , cdate : '2023-11-02' , bview : 0 } ,
     ];
-
-
-
-
-
 
 
             <div>

@@ -21,10 +21,19 @@ public class BoardController {
         return boardService.write(boardDto);
     }
     // 2. R
-    @GetMapping("")
+    @GetMapping("") // 전체출력
     public List<BoardDto> getAll(){
         return boardService.getAll();
     }
+
+    // 2-1. R (개별게시물출력)
+    @GetMapping("/doGet")
+    public BoardDto doGet(@RequestParam int bno){
+        return  boardService.doGet(bno);
+
+    }
+
+
     // 3. U
     @PutMapping("")
     public boolean update(BoardDto boardDto){

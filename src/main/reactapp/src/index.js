@@ -21,6 +21,8 @@ import reportWebVitals from './reportWebVitals';
 import 상태관리컴포넌트 from './component/example/day05/1_상태관리컴포넌트'
 import 생명주기컴포넌트 from './component/example/day05/2_생명주기컴포넌트'
 
+import 라우터매개변수 from './component/example/day06/1_라우터매개변수'
+
 
 import Index from './component/Index'
 
@@ -34,6 +36,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 //root.render(<React.StrictMode>  <TodoList/> </React.StrictMode>);
 
 root.render(<Index/>);
+//root.render(<라우터매개변수/>);
+
 //root.render(<상태관리컴포넌트/>);
 //root.render(<생명주기컴포넌트/>);
 // If you want to start measuring performance in your app, pass a function

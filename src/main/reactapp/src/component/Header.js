@@ -26,7 +26,7 @@ export default function Header(props){
     // - 회원정보 호출 [ 로그인 여부 확인 ]
 
     useEffect(()=>{
-        axios.get('member/get').then(r=>{console.log('login get');
+        axios.get('/member/get').then(r=>{console.log('login get');
 
         if(r.data != ''){// 2. 만약에 로그인이 되어 있으면
             // 브라우저 세션/쿠키 // 브라우저 F12 -> 애플리케이션탭 -> Local storage / Session storage

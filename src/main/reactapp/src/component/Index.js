@@ -23,6 +23,8 @@ import Info from './member/Info';
 
 import BoardList from './board/BoardList';
 import BoardWrite from './board/BoardWrite';
+import BoardView from './board/BoardView';
+import BoardUpdate from './board/BoardUpdate';
 
 
 import CSS적용컴포넌트 from './example/day02/1_CSS적용컴포넌트';
@@ -58,6 +60,8 @@ export default function Index(props){
                     {/*board*/}
                     <Route path='/board/list' element={<BoardList />}/>
                     <Route path='/board/write' element={<BoardWrite />}/>
+                    <Route path='/board/view' element={<BoardView />}/>
+                    <Route path='/board/update' element={<BoardUpdate />}/>
 
                 </Routes>
                 <Footer />
