@@ -37,12 +37,12 @@ export default function Index(props){
             <BrowserRouter>
                 <Header />
                 <Routes>
+
                     {/*Main*/}
                     <Route path = '/' element = { <Main />} />
 
                     {/*Example*/}
                     <Route path = '/example' element = { < ExampleList/>}/>
-
                     <Route path = '/example/day01/컴포넌트1' element = { < 컴포넌트1/>}/>
                     <Route path = '/example/day01/컴포넌트2' element = { < 컴포넌트2/>}/>
                     <Route path = '/example/day01/컴포넌트3' element = { < 컴포넌트3/>}/>
@@ -53,10 +53,12 @@ export default function Index(props){
                     <Route path = '/example/day01/과제1_도서목록' element = { <과제01/>}/>
                     <Route path = '/example/day02/Work2/TodoList' element = { <과제02/>}/>
                      <Route path = '/example/day04/Axios컴포넌트' element = { <Axios컴포넌트/>}/>
+
                     {/*MEMBER*/}
                     <Route path='/login' element={<Login />}/>
                     <Route path='/info' element={<Info />}/>
                     <Route path='/signup' element={<Signup />}/>
+
                     {/*board*/}
                     <Route path='/board/list' element={<BoardList />}/>
                     <Route path='/board/write' element={<BoardWrite />}/>

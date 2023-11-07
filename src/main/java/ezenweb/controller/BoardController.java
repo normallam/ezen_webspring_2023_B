@@ -1,6 +1,7 @@
 package ezenweb.controller;
 
 import ezenweb.model.dto.BoardDto;
+import ezenweb.model.dto.PageDto;
 import ezenweb.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,8 +23,16 @@ public class BoardController {
     }
     // 2. R
     @GetMapping("") // 전체출력
-    public List<BoardDto> getAll(){
-        return boardService.getAll();
+    public PageDto getAll(
+            @RequestParam int page,
+            @RequestParam String key,
+            @RequestParam String keyword)
+
+
+    {
+        System.out.println("BoardController.getAll");
+        System.out.println("page = " + page);
+        return boardService.getAll(page, key, keyword);
     }
 
     // 2-1. R (개별게시물출력)
