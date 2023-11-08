@@ -48,21 +48,32 @@ export default function BoardList( props ){
         console.log(pageDto);
     // 0. 페이지 번호 // 스프링에게 전달할 객체
     const [ pageInfo, setPageInfo] = useState( {
-       page : 1, key: '', keyword: ''
+       page: 1,
+       key: 'btitle',
+       keyword: '',
+       view: 5,
 
     } );    console.log(pageInfo);
 
-    // 1. axios를 이용한 스프링의 컨트롤과 통신 [ 실행조건 : 컴포넌트가 실행됬을 떄 , 페이지가 바뀌었을 떄, ]
-    useEffect( ()=>{   // 컴포넌트가 생성/특정 상태 변수가 변경될떄 axios
-        axios.get('/board', {params: pageInfo}).then( r =>{
-                console.log('axios 안에 들어오나');
-                // r.data : PageDto
-                // r.data.boardDtos : PageDto 안에 있는 boardDto
-               setpageDto( r.data ); // 응답받은 모든 게시물을 상태변수에 저장
-               // setState : 해당 컴포넌트가 업데이트(새로고침/재랜더링/return재실행)
-           });
-    } , [pageInfo] );
+    // 1. axios를 이요한 스프링의 컨트롤과 통신
 
+
+    // 1. axios를 이용한 스프링의 컨트롤과 통신 [ 실행조건 : 컴포넌트가 실행됬을 떄 , 페이지가 바뀌었을 떄, ]
+       // 컴포넌트가 생성/특정 상태 변수가 변경될떄 axios // 페이지인포에 의존성배열을 가지고 있어서 pageInfo가 변경되면 useeffect 변뎡되서 실행
+
+    // 컴포넌트가 생성될 때
+    const getBoard=(e)=>{
+      axios.get('/board', {params: pageInfo})
+        .then( r =>{
+            console.log('axios 안에 들어오나');
+            // r.data : PageDto
+            // r.data.boardDtos : PageDto 안에 있는 boardDto
+           setpageDto( r.data ); // 응답받은 모든 게시물을 상태변수에 저장
+           // setState : 해당 컴포넌트가 업데이트(새로고침/재랜더링/return재실행)
+    });
+ }
+    // 1. 컴포넌트가 생성될 때 // +의존성배열 : page 변경될때 // +의존성배열 : view (주소값) 변경될떄
+    useEffect(()=>{getBoard();}, [pageInfo.page, pageInfo.view]);
 
     // 2. 페이지 번호를 클릭했을 때
     const onPageSelect = (e, value)=> {
@@ -72,9 +83,12 @@ export default function BoardList( props ){
         setPageInfo({...pageInfo}); // 새로고침 [상태변수의 주소값이 바뀌면 재랜더링]
      }
 
-    // 3. 검색버튼을 눌렀을 때
-    const onSearch= (e)=>{ }
+    // 3. 검색버튼을 눌렀을 때 // 첫페이지 1페이지 초기화
+    const onSearch= (e)=>{
+        setPageInfo({...pageInfo , page : 1}); // 첫페이지 1페이지 초기화
+        getBoard();
 
+     }
 
 
     console.log(pageInfo);
@@ -83,16 +97,47 @@ export default function BoardList( props ){
         <h3> 게시물 목록 </h3>
         <a href="/board/write">글쓰기</a>
         <p> page : {pageInfo.page} totalCount : {pageDto.totalCount}</p>
+
+         {/*이벤트함수명 ={(e)=>{}*/}
+            <select value={pageInfo.view} onChange={(e)=>{setPageInfo({...pageInfo, view: e.target.value});}}
+            >
+                <option value="5"> 5 </option>
+                <option value="10"> 10 </option>
+                <option value="20"> 20 </option>
+            </select>
+
+            {/*삼항연산자 응 이용한 조건부 랜더링*/}
+            {
+                pageInfo.keyword == ''?
+                (<></>)
+                :
+                (<><button ></button></>)
+
+
+            }
+
+
+            <button  type="button"
+                        onClick = {
+                            (e)=> {
+                                    setPageInfo(
+                                            { ...pageInfo , key : 'btitle' , keyword : '' , page : 1  }
+                                     );
+                                     getBoard();
+                                }
+                        }
+                    > 검색제거 </button>
+
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             {/*테이블 제목 구역*/}
             <TableHead>
               <TableRow>
-                <TableCell align="right">번호</TableCell>
-                <TableCell align="right">제목(g)</TableCell>
-                <TableCell align="right">작성자(g)</TableCell>
-                <TableCell align="right">작성일</TableCell>
-                <TableCell align="right">조회수</TableCell>
+                <TableCell style={{width : '5%'}} align="center">번호</TableCell>
+                <TableCell style={{width : '5%'}} align="center">제목(g)</TableCell>
+                <TableCell style={{width : '5%'}} align="center">작성자(g)</TableCell>
+                <TableCell style={{width : '5%'}}align="center">작성일</TableCell>
+                <TableCell style={{width : '5%'}} align="center">조회수</TableCell>
               </TableRow>
             </TableHead>
              {/*테이블 내용 구역*/}
@@ -100,25 +145,27 @@ export default function BoardList( props ){
               {pageDto.boardDtos.map((row) => (  // map is not a function
                 <TableRow key={row.name}  sx={{ '&:last-child td, &:last-child th': { border: 0 } }} >
                   <TableCell align="right">{row.bno}</TableCell>
-                  <TableCell align="right">
+                  <TableCell align="left">
                     <Link to={"/board/view?bno="+row.bno}>{row.btitle}</Link>
                     </TableCell>
-                  <TableCell align="right">{row.mno}</TableCell>
-                  <TableCell align="right">{row.cdate}</TableCell>
-                  <TableCell align="right">{row.bview}</TableCell>
+                  <TableCell align="center">{row.memail}</TableCell> {/* mno에서 memail로 수정*/}
+                  <TableCell align="center">{row.cdate}</TableCell>
+                  <TableCell align="center">{row.bview}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </TableContainer>
+
         <div style={{ display : 'flex', flexDirection : 'column', alignItems:'center', margin : '10px' }}>
-            {/* count : 전체페이지수  onChange : 페이지번호를 클릭/변경 했을때 이벤트*/}
-           <Pagination count={pageDto.totalPages} onChange={onPageSelect} />
+
+            {/* page: 현재페이지수 count : 전체페이지수  onChange : 페이지번호를 클릭/변경 했을때 이벤트*/}
+           <Pagination page={pageInfo.page} count={pageDto.totalPages} onChange={onPageSelect} />
         </div>
 
 
         {/*검색*/}
-        <div style={{alignItems:'center', margin: '20px'}}>
+        <div style={{textAlign:'center', margin: '20px'}}>
             <select
                 value={pageInfo.key}
                 onChange = {
@@ -136,10 +183,6 @@ export default function BoardList( props ){
                  />
                 <button type="button" onClick={ onSearch }>검색</button>
         </div>
-
-
-
-
 
     </>)
 }

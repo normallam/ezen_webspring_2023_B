@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
@@ -67,7 +68,7 @@ public class BoardService {
     }
     // 2.
     @Transactional
-    public PageDto getAll(int page, String key, String keyword){
+    public PageDto getAll(int page, String key, String keyword, int view){
         System.out.println("BoardService.getAll");
         System.out.println("page = " + page);
         /*  *JPA 페이징처리 라이브러리 지원 [ 1. 직접구현 : 로직힘들고 2. 라이브러리 : 남이 만들어서 이해하기 어려움 ]*/
@@ -79,7 +80,7 @@ public class BoardService {
                 // 페이지별 게시물수 : 만약에 2일때는 페이지마다 게시물 2개씩 출력
             // 3. Page : list와 마찬가지로 페이징결과의 여러개의 객체를 저장하는 타입
                 // list와 다르게 추가적으로 함수 지원
-        Pageable pageable = PageRequest.of (page-1, 2);
+        Pageable pageable = PageRequest.of (page-1, view, Sort.by(Sort.Direction.DESC, "cdate")); // 화면에 표시할 게시물 수
         // of -> static 함수 -> 객체 필요없어서 new 안씀
 
 
@@ -95,13 +96,13 @@ public class BoardService {
         List<BoardDto> boardDtos = new ArrayList<>();
         boardEntities.forEach( e -> {   boardDtos.add( e.alltoDto() );  });
 
-            // 3. 총 페이지수
+        // 3. 총 페이지수
         int totalPages = boardEntities.getTotalPages();
 
-            // 4. 총 게시물수
+        // 4. 총 게시물수
         Long totalCount = boardEntities.getTotalElements(); // 요소 : 단위(여기서는 게시물 1개)
 
-            // 5. pageDto 구성해서 axios에게 전달
+        // 5. pageDto 구성해서 axios에게 전달
         PageDto pageDto = PageDto.builder()
                 .boardDtos(boardDtos)
                 .totalPages(totalPages)
@@ -156,6 +157,8 @@ public class BoardService {
         if(boardEntityOptional.isPresent()){
             // 3. 엔티티 꺼내기
             BoardEntity boardEntity = boardEntityOptional.get();
+                // + 조회수 증가
+                boardEntity.setBview(boardEntity.getBview()+1);
             // 4. 엔티티 -> dto 변환
             BoardDto boardDto = boardEntity.alltoDto();
             // 5. dto 변환

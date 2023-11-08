@@ -26,13 +26,15 @@ public class BoardController {
     public PageDto getAll(
             @RequestParam int page,
             @RequestParam String key,
-            @RequestParam String keyword)
+            @RequestParam String keyword,
+            @RequestParam int view
+    )
 
 
     {
         System.out.println("BoardController.getAll");
         System.out.println("page = " + page);
-        return boardService.getAll(page, key, keyword);
+        return boardService.getAll(page, key, keyword, view);
     }
 
     // 2-1. R (개별게시물출력)
