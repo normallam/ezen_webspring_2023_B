@@ -94,7 +94,7 @@ public class BoardService {
 
         // 2.  List<BoardEntity> --> List<BoardDto>
         List<BoardDto> boardDtos = new ArrayList<>();
-        boardEntities.forEach( e -> {   boardDtos.add( e.alltoDto() );  });
+        boardEntities.forEach( e -> {   boardDtos.add( e.alltodto() );  });
 
         // 3. 총 페이지수
         int totalPages = boardEntities.getTotalPages();
@@ -160,7 +160,7 @@ public class BoardService {
                 // + 조회수 증가
                 boardEntity.setBview(boardEntity.getBview()+1);
             // 4. 엔티티 -> dto 변환
-            BoardDto boardDto = boardEntity.alltoDto();
+            BoardDto boardDto = boardEntity.alltodto();
             // 5. dto 변환
             return  boardDto;
 
