@@ -3,6 +3,7 @@ package ezenweb.controller;
 import ezenweb.model.dto.BoardDto;
 import ezenweb.model.dto.PageDto;
 import ezenweb.service.BoardService;
+import ezenweb.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,4 +56,14 @@ public class BoardController {
     public boolean delete(@RequestParam int bno){
         return boardService.delete(bno);
     }
+
+    // 5. 첨부파일 다운로드
+    @GetMapping("/filedownload")
+    public void filedownload(
+            @RequestParam String uuidFile){
+        fileService.fileDownload(uuidFile);
+    } // m end
+
+    @Autowired private FileService fileService;
+
 }

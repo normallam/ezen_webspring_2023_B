@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -29,6 +30,9 @@ public class BoardService {
     // 1.
     @Transactional // 함수내 여럿 SQL를 하나의 일처리 단위로 처리
     public boolean write( BoardDto boardDto  ){
+
+        
+        
         /*
             MemberEntity                                BoardEntity
              [p]  mno                                       [p] bno
@@ -64,8 +68,19 @@ public class BoardService {
         // 5. 양방향 저장 [ 회원엔티티에 게시물 엔티티 넣어주기 ]
         memberEntityOptional.get().getBoardEntityList().add( boardEntity );
         // ================================= 양방향 end ================================================= //
-        if( boardEntity.getBno() >= 1) { return true; } return false;
-    }
+        if( boardEntity.getBno() >= 1) {
+            // 게시물 쓰기 성공시 파일 처리
+            String fileName
+                    = fileService.fileUpload(boardDto.getFile());
+            // 파일처리 결과를 DB에 저장
+            if(fileName != null){boardEntity.setBfile(fileName);}
+            return true; }
+
+        return false;
+    } // WRITE m end
+
+    @Autowired FileService fileService;
+
     // 2.
     @Transactional
     public PageDto getAll(int page, String key, String keyword, int view){
