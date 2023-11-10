@@ -1,15 +1,21 @@
 package ezenweb.model.entity;
 
 import example.객체연관관계.하위클래스;
-import lombok.Builder;
-import lombok.ToString;
+import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity@Table(name="productcategory")
-public class ProductCategoryEntity {/*제품 카테고리*/
+@Entity@Table(name="productcategory") // 해당 클래스를 db테이블과 매핑 [ 엔티티클래스 <----> db테이블 ( 엔티티 객체 1개 <---> db테이블내 레코드 1개  ) ]
+ // db테이블명 정의 [ 생략시 해당 클래스명이 db테이블 명으로 자동 생성 ]
+@AllArgsConstructor
+@NoArgsConstructor
+@DynamicInsert
+@Getter
+@Setter @ToString @Builder
+public class ProductCategoryEntity extends BaseTime{/*제품 카테고리*/
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int pcno;       // 카테고리 번호[PK]
     @Column

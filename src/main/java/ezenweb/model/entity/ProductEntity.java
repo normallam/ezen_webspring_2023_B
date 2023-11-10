@@ -1,14 +1,22 @@
 package ezenweb.model.entity;
 
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity@Table(name="product")
-public class ProductEntity {/*제품 테이블*/
+@Entity@Table(name="product") // 해당 클래스를 db테이블과 매핑 [ 엔티티클래스 <----> db테이블 ( 엔티티 객체 1개 <---> db테이블내 레코드 1개  ) ]
+// db테이블명 정의 [ 생략시 해당 클래스명이 db테이블 명으로 자동 생성 ]
+@AllArgsConstructor
+@NoArgsConstructor
+@DynamicInsert
+@Getter
+@Setter
+@ToString @Builder
+public class ProductEntity extends BaseTime{/*제품 테이블*/
     @Id private String pno;     // 제품번호[pk]
     @Column private String pname;   // 제품명
     @Column( columnDefinition = "TEXT") private String pcomment;// 제품설명

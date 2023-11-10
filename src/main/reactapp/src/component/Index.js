@@ -25,6 +25,8 @@ import BoardList from './board/BoardList';
 import BoardWrite from './board/BoardWrite';
 import BoardView from './board/BoardView';
 import BoardUpdate from './board/BoardUpdate';
+/*Product import*/
+import ProductAdmin from './product/ProductAdmin';
 
 
 import CSS적용컴포넌트 from './example/day02/1_CSS적용컴포넌트';
@@ -64,6 +66,9 @@ export default function Index(props){
                     <Route path='/board/write' element={<BoardWrite />}/>
                     <Route path='/board/view' element={<BoardView />}/>
                     <Route path='/board/update' element={<BoardUpdate />}/>
+
+                    {/*admin*/}
+                    <Route path='/admin/product' element={<ProductAdmin />}/>
 
                 </Routes>
                 <Footer />
