@@ -23,6 +23,7 @@ public class ProductCategoryEntity extends BaseTime{/*제품 카테고리*/
 
     // 양방향 만들기
     @OneToMany( fetch = FetchType.LAZY, mappedBy = "productCategoryEntity", cascade = CascadeType.ALL)
+    @Builder.Default
     @ToString.Exclude List<ProductEntity> ProductEntityList = new ArrayList<>();
 
     /*

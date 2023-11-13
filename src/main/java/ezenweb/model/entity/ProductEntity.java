@@ -30,7 +30,9 @@ public class ProductEntity extends BaseTime{/*제품 테이블*/
 
     // 양방향 만들기
     @ToString.Exclude
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "productEntity", cascade = CascadeType.ALL)
-    List<ProductImgEntity> ProductImgEntityList = new ArrayList<>();
+    @Builder.Default
+    List<ProductImgEntity> productImgEntityList = new ArrayList<>();
     //@OneToMany(mappedBy ="fk 사용중인 엔티티클래스 필드명")
 }

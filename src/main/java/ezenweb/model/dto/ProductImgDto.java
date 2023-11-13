@@ -13,7 +13,7 @@ import javax.persistence.Id;
 @Builder
 public class ProductImgDto {
 
-    private String uuidFile;    // 이미지식별이름[PK]
+    private String uuidFileName;    // 이미지식별이름[PK]
     private String realFileName;// 이미지실제이름
 
 }
