@@ -1,8 +1,52 @@
 import {Link} from 'react-router-dom';
 import styles from '../css/header.css' // css파일 호출
 import axios from 'axios';
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useRef} from 'react'
+        // useRef : 해당 컴포넌트/함수가 재랜더링/재호출 할때 상태유지
 export default function Header(props){
+
+    /*let 변수 = 10;
+    변수++;
+        //랜더링
+        console.log(변수);
+
+    let Ref변수 = useRef(10);
+    Ref변수++;
+        // 랜더링
+        console.log(Ref변수);*/
+
+    // 1. 지역변수
+    let 변수 = 10
+    console.log(변수);
+    // 2.
+    let ref변수 = useRef(10);
+    console.log(ref변수);// 주소값으로 값을 저장 -> 주소 -> 힙으로 쓴다는 것 -> 주소값이 있다는 것 값을 객체로 저장
+    console.log(ref변수.current); // 값을 호출할때 Ref변수.current 이렇게 써야함
+
+    // 2. 웹소켓 // 구조 : 콜백함수 => event onmessage가 실행된 결과 => 눈에는 안보임
+    // =================소켓=================== //
+        // 1. 클라이언트소켓 만들기
+
+        let 클라이언트소켓 = new WebSocket("ws://localhost:80/chat");
+        console.log(클라이언트소켓)
+
+        // 1. 클라이언트소켓과 연동 성공했을때. 이후 행동/메소드 정의
+        클라이언트소켓.onopen = (e)=>{console.log(e);} // e : 매개변수명
+
+        // 2. 클라이언트소켓과 연동 오류가 발생했을때 이후 행동/메소드 정의
+        클라이언트소켓.onerror = (e)=>{console.log(e);}
+
+        // 3. 클라이언트소켓과 연동이 끊겼을때 이후 행동/메소드 정의
+        클라이언트소켓.onclose = (e)=>{console.log(e);}
+
+        // 4. 클라이언트소켓으로부터 메세지를 받았을때 이후 행동/메소드 정의
+        클라이언트소켓.onmessage = (e)=>{console.log(e);}
+
+        // 2. 클라이언트소켓 메세지 전송
+        const msgSend = (e) =>{클라이언트소켓.send("안녕");}
+
+    // =================소켓=================== //
+
 
     // 1. 로그인 상태를 저장할 상태변수 선언
     let [login, setLogin] = useState(null);
@@ -49,6 +93,7 @@ export default function Header(props){
 
     return(<>
         <header>
+            <button type="button" onClick={msgSend}> 전송 </button>
             <h2> <Link to='/'> 이젠리액트 </Link> </h2>
             <ul>
                 <li> <Link to='/example'>리액트예제</Link></li>

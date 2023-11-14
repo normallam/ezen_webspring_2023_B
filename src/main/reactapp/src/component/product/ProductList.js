@@ -13,7 +13,7 @@ export default function ProductList( props ){
             })
     }
     useEffect( ()=>{ onProductAll() } , [ ])
-
+    console.log( productList );
     return(<>
         <h3> 제품 목록 </h3>
         <table style={{ width : '100%'}}>
@@ -28,7 +28,7 @@ export default function ProductList( props ){
                  <th  style={{ width : '10%'}}> 비고 </th>
             </tr>
             {
-                productList.map( (p)=>{
+                productList&&productList.map( (p)=>{
                     return (<>
                         <tr>
                             <td> { p.pno } </td>

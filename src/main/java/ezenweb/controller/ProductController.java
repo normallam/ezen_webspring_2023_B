@@ -49,8 +49,8 @@ public class ProductController {
 
     @GetMapping("") // 요청 : / 응답 :
     public List<ProductDto> onProductAll(){
+        System.out.println("컨트롤러 들어옴");
         return productService.onProductAll();
-
     }
 
     @PutMapping("") // 요청 : / 응답 :
