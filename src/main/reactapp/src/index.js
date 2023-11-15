@@ -26,6 +26,9 @@ import 라우터매개변수 from './component/example/day06/1_라우터매개�
 
 import Index from './component/Index'
 
+/* MUI 라이브러리 호출 */
+import { SnackbarProvider } from 'notistack';
+
 //1. index.html에 <div id="root"> dom객체 호출
 const root = ReactDOM.createRoot(document.getElementById('root'));
 //root.render(<React.StrictMode>  <Index /> </React.StrictMode>);
@@ -35,11 +38,17 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 //root.render(<React.StrictMode>  <CommentList/> </React.StrictMode>);
 //root.render(<React.StrictMode>  <TodoList/> </React.StrictMode>);
 
-root.render(<Index/>);
+root.render(
+    <SnackbarProvider maxSnack={5}>
+        <Index />
+    </SnackbarProvider>
+);
 //root.render(<라우터매개변수/>);
 
 //root.render(<상태관리컴포넌트/>);
 //root.render(<생명주기컴포넌트/>);
+//root.render(<생명주기컴포넌트/>);
+
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

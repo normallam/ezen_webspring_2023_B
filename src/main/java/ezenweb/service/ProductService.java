@@ -19,6 +19,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -131,6 +132,15 @@ public class ProductService {
     // 4. 제품 삭제
     @Transactional public boolean onProductDelete( String pno ){
         return false;
+    }
+// -----------------------------------------------차트 데이터 ------------------------------------------//
+   @Transactional
+    public List<Map<Object,Object>> getBarChart(){
+        return productEntityRepository.findByBarChart();
+    }
+   @Transactional
+    public List<Map<Object,Object>> getPieChart(){
+        return productEntityRepository.findByPieChart();
     }
 
 }

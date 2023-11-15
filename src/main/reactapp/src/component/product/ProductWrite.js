@@ -1,7 +1,16 @@
 import axios from 'axios';
 import CategoryWrite from './CategoryWrite';
 
+
+import {useContext} from 'react';
+import {SocketContext} from '../Index.js'
+
 export default function ProductWrite(props){
+
+    // 1. 상위 컴포넌트에 있는 context의 들어있는 클라이언트소켓 꺼내기
+    const clientSocket = useContext(SocketContext).current;
+
+    /*console.log(useContext(SocketContext))*/
 
     // 1. 제품등록
     const onProductAdd = (e)=>{
@@ -12,7 +21,11 @@ export default function ProductWrite(props){
 
         axios.post('/product', productFormData)
             .then(r=>{
-                if(r.data){alert("제품등록 성공"); productForm.reset();}
+                if(r.data){
+                     // [소켓3] : 서버에게 메세지 보내기
+                     clientSocket.send('새로운 제품이 등록 되었습니다.');
+                     productForm.reset();
+                }
                 else{alert("제품등록 실패")}
             });
     }
@@ -20,9 +33,6 @@ export default function ProductWrite(props){
    /* const printProduct = (e)=>{
         axios.get('/product/category').then(r=>{console.log(r.data); set})
     }*/
-
-
-
 
     return(<>
        <div style={{width : '300px', margin: '0 auto'}}>

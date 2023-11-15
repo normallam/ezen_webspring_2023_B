@@ -6,17 +6,24 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Component  // 스프링 컨테이너에 빈 등록
 public class ChattingController extends TextWebSocketHandler {
 
-    // 1. 클라이언트소켓과 연동 성공했을때
+    // 0. 서버소켓과 연동된 클라이언트소켓들을 저장하는 리스트
+    private static List<WebSocketSession> 접속명단 = new ArrayList<>();
+
+    // 1. 클라이언트소켓과 연동 성공했을때 // 연동 성공한 사람들을 보여줘야함
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        System.out.println("session = " + session);
+        // 접속 연동 성공시 클라이언트소켓의 세션정보를 접속명단 리스트에 저장
+        접속명단.add(session);
     }
 
-    // 2. 클라이언트소켓과 연동 오류가 발생했을때
+    // 2. 클라이언트소켓과 연동 오류가 발생했을때 //
     @Override
     public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
         System.out.println("session = " + session + ", exception = " + exception);
@@ -26,13 +33,17 @@ public class ChattingController extends TextWebSocketHandler {
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        System.out.println("session = " + session + ", status = " + status);
+        // * 접속 연동이 끊겼을 때 접속명단 에서도 제거
+        접속명단.remove(session);
     }
 
     // 4. 클라이언트소켓으로부터 메세지를 받았을때
 
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-        System.out.println("session = " + session + ", message = " + message);
+        // * 서버가 클라이언트로부터 받은 메세지를 접속명단에 있는 모든 세션들에게 저장
+        for(WebSocketSession 세션 : 접속명단 ){
+            세션.sendMessage(message);
+        }
     }
 }
