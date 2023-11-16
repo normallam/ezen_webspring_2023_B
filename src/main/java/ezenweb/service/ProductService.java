@@ -66,7 +66,7 @@ public class ProductService {
         return productCategoryEntityOptional.isPresent() ? productCategoryEntityOptional.get() : null;
     }
 
-    // ================================ 제품등록 ============================= //
+    // ================================ 제품  ============================= //
     // 1. 제품 등록 [ 이미지 포함 ]
     @Transactional public boolean onProductAdd( ProductDto productDto ){ System.out.println( productDto );
         // 1. 카테고리 엔티티 준비..
@@ -79,7 +79,7 @@ public class ProductService {
                 // 카테고리번호 - 등록날짜
                 .pname( productDto.getPname() ) .pcomment( productDto.getPcomment() )
                 .pprice( productDto.getPprice() )  .pstock( productDto.getPstock() )
-                .productCategoryEntity( productCategoryEntity ).productImgEntityList( new ArrayList<>() )
+                .productCategoryEntity( productCategoryEntity ) .productImgEntityList( new ArrayList<>() )
                 .build();
         // 2-2 제품 이미지 등록 [ 첨부파일 여러개 ]
         productDto.getFileList().stream().map( file->{
@@ -124,7 +124,6 @@ public class ProductService {
                     .build();
         }).collect(Collectors.toList());
     }
-
     // 3. 제품 수정
     @Transactional public boolean onProductUpdate( ProductDto productDto ){
         return false;
@@ -133,14 +132,12 @@ public class ProductService {
     @Transactional public boolean onProductDelete( String pno ){
         return false;
     }
-// -----------------------------------------------차트 데이터 ------------------------------------------//
-   @Transactional
-    public List<Map<Object,Object>> getBarChart(){
+
+    // ================================ 차트 데이터 ============================= //
+    @Transactional public List<Map<Object,Object>> getBarChart( ){
         return productEntityRepository.findByBarChart();
     }
-   @Transactional
-    public List<Map<Object,Object>> getPieChart(){
+    @Transactional public List<Map<Object,Object> > getPieChart( ) {
         return productEntityRepository.findByPieChart();
     }
-
 }
